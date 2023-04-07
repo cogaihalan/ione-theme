@@ -1,89 +1,482 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/9.19.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/9.19.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/9.19.1/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IONE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/index.css" type="text/css">
+  <script src="../js/app.js" defer></script>
+</head>
+<style>
+  .mySlides {
+    display: none
+  }
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+  img {
+    vertical-align: middle;
+  }
+
+  /* Slideshow container */
+  .slideshow-container {
+    max-width: 1280px;
+    position: relative;
+    margin: auto;
+  }
+
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  /* Caption text */
+  .text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .bannerActive,
+  .dot:hover {
+    background-color: #717171;
+  }
+
+  /* Fading animation */
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: .4
+    }
+
+    to {
+      opacity: 1
+    }
+  }
+
+  /* On smaller screens, decrease text size */
+  @media only screen and (max-width: 300px) {
+
+    .prev,
+    .next,
+    .text {
+      font-size: 11px
+    }
+  }
+</style>
+
+<body>
+  <header class="header">
+    <div class="header-top">
+      <div class="header-top--content">
+        <div class="header-top--item">
+          <span>USD</span>
+          <span>English</span>
+        </div>
+        <div class="header-top--item">
+          FREE SHIPPING on orders over $100! Details
+        </div>
+        <div class="header-top--item">
+          Order Tracking
+        </div>
+      </div>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <div class="header-toolbar">
+      <div class="header-primaryAction">
+        <a href="/" class="header-icon">
+          <img class="header-icon" src="assets/images/ione.png">
+        </a>
+      </div>
+      <div class="header-actions">
+        <div class="header-searchBar">
+          <div class="header-searchBar--search">
+            <input placeholder="Search..." class="header-input" name="search_query" value="">
+            <button class="header-searchBtn">Search</button>
+          </div>
+        </div>
+        <div class="header-contact">
+          <div class="header-contact--right">
+            <span>CALL US NOW</span>
+            <a href="tel:+0986452123">0986 452 123</a>
+          </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        </div>
+        <div class="header-accountActions">
+          <div class="header-account">
+            <span class="header-accountIcon"></span>
+            <span class="header-accountName"></span>
+          </div>
+          <div class="signInPopup">
+            <button class="tooglesignInPopup">X</button>
+            <div class="signInPopup-root">
+              <h2 class="signIn-title">LOG IN</h2>
+              <form class="signIn-form">
+                <div class="input-field">
+                  <label class="input-label" for="email">Email</label>
+                  <input class="input-email" id="email" type="text" required />
+                  <p class="message-error"></p>
+                </div>
+                <div class="input-field">
+                  <label class="input-label" for="password">Password</label>
+                  <input class="input-password" id="password" type="password" required />
+                  <p class="message-error"></p>
+                </div>
+                <button class="btn-summit" type="submit">LOG IN</button>
+              </form>
+              <div class="signIn-rootBottom">
+                <span>Don't have an account ?</span>
+                <a onclick="renderSignUpPage()"><span>Sign Up</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="header-help">
+          <span class="header-helpIcon"></span>
+          <span>Need help</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-bottom">
+      <div class="header-menu">
+        <nav class="header-menu--list">
+          <div class="header-menu--item">
+            <a href="">Tablet</a>
+          </div>
+          <div class="header-menu--item">
+            <a href="/laptops.html">Laptops</a>
+            <div class="header-subMenu">
+              <div class="header-subMenu--item">
+                <a onclick="renderCategoryPage('laptops','asus')">Asus</a>
+              </div>
+              <div class="header-subMenu--item">
+                <a onclick="renderCategoryPage('laptops','acer')">Acer</a>
+              </div>
+              <div class="header-subMenu--item">
+                <a onclick="renderCategoryPage('laptops','lenovo')">Lenovo</a>
+              </div>
+            </div>
+          </div>
+          <div class="header-menu--item">
+            <a href="">Desktops</a>
+          </div>
+          <div class="header-menu--item">
+            <a href="">Gaming</a>
+          </div>
+          <div class="header-menu--item">
+            <a href="">Shop By Brand</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main class="main">
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+
+    <div class="container main-container">
+      <div class="content main-content">
+        <section class="carousel">
+          <div class="slideshow-container">
+            <div class="mySlides fade">
+              <div class="bannerWrapper firstBanner">
+                <div class="bannerContent">
+                  <h3 class="bannerSubTitle">THE NEW COLLECTION</h3>
+                  <h2 class="bannerTitle">SMARTPHONES</h2>
+                  <p class="bannerInfo">iPhone</p>
+                  <p class="bannerDescription">
+                    <span>From $33.29/mo. for 24 mo. or $799 before trade‑in</span>
+                    <span>iPhone Plus available starting 10.7</span>
+                  </p>
+                  <div class="bannerButton">
+                    <button>EXPLORE NOW</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mySlides fade">
+              <div class="bannerWrapper secondBanner">
+                <div class="bannerContent">
+                  <h3 class="bannerSubTitle">THE NEW COLLECTION</h3>
+                  <h2 class="bannerTitle">GAMING LAPTOP</h2>
+                  <p class="bannerInfo">Unlease Gaming</p>
+                  <p class="bannerDescription">
+                    <span>16GB , Nvidia GeForce GTX 1060 1TB Hard disk</span>
+                    <span>SSD 256GB , Windows 10 Home , Display size 15.60-inch</span>
+                  </p>
+                  <div class="bannerButton">
+                    <button>EXPLORE NOW</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="mySlides fade">
+              <div class="bannerWrapper lastBanner">
+                <div class="bannerContent">
+                  <h3 class="bannerSubTitle">THE NEW COLLECTION</h3>
+                  <h2 class="bannerTitle">HEADPHONES</h2>
+                  <p class="bannerInfo">Bose</p>
+                  <p class="bannerDescription">
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                    <span>In massa sed imperdiet ipsum, sed interdum sollicitudin dui. 7</span>
+                  </p>
+                  <div class="bannerButton">
+                    <button>EXPLORE NOW</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+
+          </div>
+          <br>
+
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+          </div>
+
+
+        </section>
+        <section class="home-content ">
+          <h2 class="main-title">FEATURED PRODUCTS</h2>
+          <div id="featured-products" class="product-list"></div>
+        </section>
+        <section class="home-content ">
+          <h2 class="main-title">HOT GAMING PRODUCTS</h2>
+          <div class="product-banner"></div>
+          <div class="product-list" id="hot-gaming-products"></div>
+        </section>
+        <section class="home-content ">
+          <h2 class="main-title">Best Seller</h2>
+          <div id="best-seller-products" class="product-list"></div>
+        </section>
+        <section class="home-content shop-by-brand">
+          <h2 class="main-title">Shop By Brand</h2>
+          <div class="brand-list">
+            <div class="brand-item">
+              <div class="brand-item__imageContainer">
+                <img src="./assets/images/home/brands/brand_1.png" alt="">
+              </div>
+            </div>
+            <div class="brand-item">
+              <div class="brand-item__imageContainer">
+                <img src="./assets/images/home/brands/brand_2.png" alt="">
+              </div>
+            </div>
+            <div class="brand-item">
+              <div class="brand-item__imageContainer">
+                <img src="./assets/images/home/brands/brand_3.png" alt="">
+              </div>
+            </div>
+            <div class="brand-item">
+              <div class="brand-item__imageContainer">
+                <img src="./assets/images/home/brands/brand_4.png" alt="">
+              </div>
+            </div>
+            <div class="brand-item">
+              <div class="brand-item__imageContainer">
+                <img src="./assets/images/home/brands/brand_5.png" alt="">
+              </div>
+            </div>
+            <div class="brand-item">
+              <div class="brand-item__imageContainer">
+                <img src="./assets/images/home/brands/brand_6.png" alt="">
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-newsletter">
+        <div class="footer-newsletter--titleSection">
+          <span class="footer-newsletter__title">Newsletter</span>
+          <span class="footer-newsletter__message">Get all the latest information on Events, Sales and
+            Offers.</span>
+        </div>
+        <form class="footer-newsletter__form">
+          <input placeholder="Your email address" class="footer-newsletter__field" type="text">
+          <button class="footer-newsletter__subscribe-link">
+            <span>Subscribe</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-content">
+      <div class="footer-links">
+        <div class="footer-link">
+          <div class="footer-link__title">
+            TIGRENPWA
+          </div>
+          <ul>
+            <li><a href="/">About Us</a></li>
+            <li><a href="/">Member News</a></li>
+            <li><a href="/">Special Privileges For Members</a></li>
+          </ul>
+        </div>
+        <div class="footer-link">
+          <div class="footer-link__title">
+            CUSTOMER SERVICE
+          </div>
+          <ul>
+            <li><a href="/">Discount Coupon</a></li>
+            <li><a href="/">FAQ</a></li>
+            <li><a href="/">Warranty Terms</a></li>
+          </ul>
+        </div>
+        <div class="footer-link">
+          <div class="footer-link__title">
+            CONTACT US
+          </div>
+          <ul>
+            <li>130 Nguyen Duc Canh, Hoang Mai, Ha Noi</li>
+            <a href="tel:+0986452123">0986 452 123</a>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-tags">
+        <div class="footer-link__title">Popular Tags</div>
+        <div class="footer-tags__list">
+          <div class="footer-tag">Memory</div>
+          <div class="footer-tag">SSD</div>
+          <div class="footer-tag">Hardrive</div>
+          <div class="footer-tag">Hardrive</div>
+          <div class="footer-tag">Hardrive</div>
+          <div class="footer-tag">Hardrive</div>
+          <div class="footer-tag">Headsets</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        <span>Copyright © 2019-present TigrenPWA. All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+  <div class="navMobile-root">
+    <button class="navMobile-home active"></button>
+    <button class="navMobile-search"></button>
+    <button class="navMobile-category"></button>
+    <button class="navMobile-cart"></button>
+    <button class="navMobile-account"></button>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace("bannerActive", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " bannerActive";
+    }
+
+
+  </script>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAPNuQffBE7jRfXbXiT-MSsTjHG9osmnrw",
+      authDomain: "ione-theme.firebaseapp.com",
+      databaseURL: "https://ione-theme-default-rtdb.firebaseio.com",
+      projectId: "ione-theme",
+      storageBucket: "ione-theme.appspot.com",
+      messagingSenderId: "1096826347960",
+      appId: "1:1096826347960:web:2346ea44d0a72aa2052f4d"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+</body>
+
+
 </html>
